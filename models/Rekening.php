@@ -47,7 +47,7 @@ class Rekening extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_bank' => 'Id Bank',
+            'id_bank' => 'Bank',
             'atas_nama' => 'Atas Nama',
             'nomor_rekening' => 'Nomor Rekening',
             'created_at' => 'Created At',

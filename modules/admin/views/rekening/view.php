@@ -7,7 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\Rekening */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Rekenings', 'url' => ['index', 'id' => $model->id_bank]];
+$this->params['breadcrumbs'][] = ['label' => $model->bank->nama_bank, 'url' => ['bank/view', 'id' => $model->id_bank]];
+$this->params['breadcrumbs'][] = ['label' => 'Rekening', 'url' => ['index', 'id' => $model->id_bank]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rekening-view">
@@ -29,13 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'id_bank',
+            [
+                'label'  => 'Bank',
+                'value'  => $model->bank->nama_bank,
+            ],
             'atas_nama',
             'nomor_rekening',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
         ],
     ]) ?>
 

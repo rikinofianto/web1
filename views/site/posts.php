@@ -14,7 +14,7 @@ use yii\widgets\ListView;
                     'class' => 'list-wrapper',
                     'id' => 'list-wrapper',
                 ],
-                'layout' => "{summary}\n{items}\n{pager}",
+                'layout' => "{items}\n{pager}",
                 'itemView' => function ($model, $key, $index, $widget) {
                     return $this->render('_list_item',['model' => $model]);
                 },

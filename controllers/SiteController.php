@@ -87,12 +87,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/admin/post']);
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['/admin/post']);
         } else {
             $model->password = '';
 
@@ -227,6 +227,12 @@ class SiteController extends Controller
         ]);
 
         return $this->render('posts', ['listDataProvider' => $dataProvider]);
+    }
 
+    public function actionPost($id)
+    {
+        $dataProvider = Post::find()->where(['id' => $id])->one();
+
+        return $this->render('post_view', ['model' => $dataProvider]);
     }
 }

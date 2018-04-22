@@ -2,16 +2,19 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+use yii\helpers\Url;
 $this->title = Yii::$app->name;
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1><?php echo Html::img('@web/img/Project1.png', ['class' =>'']); ?></h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Kami merupakan salah satu Unit Kegiatan Mahasiswa tingkat universitas yang berdiri sejak 10 Maret 2018.
+						Kami merupakan wadah bagi mahasiswa Universitas Mercu Buana untuk berkegiatan di alam bebas, berkontribusi bagi masyarakat, serta peduli terhadap pelestarian lingkungan.</p>
 
-        <p><a class="btn btn-lg btn-success" href="#">Donate Now</a></p>
+        <p><?= Html::a('Donate Now', Url::toRoute(['/donasi']), ['class' => 'btn btn-lg btn-success']) ?></p>
     </div>
 
     <div class="body-content">

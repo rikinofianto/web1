@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 <article class="item" data-key="<?= $model->id; ?>">
     <h2 class="title">
-    <?= Html::a(Html::encode($model->title), Url::toRoute(['post/show', 'id' => $model->id]), ['title' => $model->title]) ?>
+    <?= Html::a(Html::encode($model->title), Url::toRoute(['post', 'id' => $model->id]), ['title' => $model->title]) ?>
     </h2>
 
     <div class="item-excerpt">

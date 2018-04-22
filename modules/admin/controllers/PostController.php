@@ -17,6 +17,20 @@ class PostController extends Controller
     /**
      * @inheritdoc
      */
+    public function beforeAction($action)
+    {
+        // your custom code here, if you want the code to run before action filters,
+        // which are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g. PageCache or AccessControl
+
+        if (parent::beforeAction($action)) {
+            if (Yii::$app->user->isGuest) {
+                return $this->redirect(['/']);
+            } else {
+                return true;
+            }
+        }
+
+    }
     public function behaviors()
     {
         return [

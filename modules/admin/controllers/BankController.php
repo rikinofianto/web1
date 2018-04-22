@@ -17,6 +17,20 @@ class BankController extends Controller
     /**
      * @inheritdoc
      */
+    public function beforeAction($action)
+    {
+        // your custom code here, if you want the code to run before action filters,
+        // which are triggered on the [[EVENT_BEFORE_ACTION]] event, e.g. PageCache or AccessControl
+
+        if (parent::beforeAction($action)) {
+            if (Yii::$app->user->isGuest) {
+                return $this->redirect(['/']);
+            } else {
+                return true;
+            }
+        }
+
+    }
     public function behaviors()
     {
         return [
@@ -66,8 +80,12 @@ class BankController extends Controller
     {
         $model = new Bank();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->created_at = date('Y-m-d');
+            $model->created_by = Yii::$app->user->id;
+            if ($model->save()) {
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('create', [
@@ -86,8 +104,12 @@ class BankController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->updated_at = date('Y-m-d');
+            $model->updated_by = Yii::$app->user->id;
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
