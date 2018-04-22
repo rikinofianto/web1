@@ -56,4 +56,9 @@ class Rekening extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
+
+    public function getBank()
+    {
+        return $this->hasOne(Bank::className(), ['id' => 'id_bank']);
+    }
 }

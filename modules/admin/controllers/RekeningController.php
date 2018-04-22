@@ -3,16 +3,16 @@
 namespace frontend\modules\admin\controllers;
 
 use Yii;
-use frontend\models\Post;
-use frontend\models\search\PostSearch;
+use frontend\models\Rekening;
+use frontend\models\search\RekeningSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * RekeningController implements the CRUD actions for Rekening model.
  */
-class PostController extends Controller
+class RekeningController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,22 +30,24 @@ class PostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all Rekening models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new PostSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new RekeningSearch();
 
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where('id_bank = '.$id);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'id' => $id
         ]);
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single Rekening model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,33 +60,31 @@ class PostController extends Controller
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new Rekening model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Post();
 
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-        $post = Yii::$app->request->post();
-        if (!empty($post) && $model->load($post)) {
-            $model->content_cut = substr($model->content, 0, 255) . '...</p>';
+        $model = new Rekening();
+
+        if ($model->load(Yii::$app->request->post())) {
             $model->created_at = date('Y-m-d');
             $model->created_by = Yii::$app->user->id;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
+
         return $this->render('create', [
             'model' => $model,
+            'id' => $id
         ]);
     }
 
     /**
-     * Updates an existing Post model.
+     * Updates an existing Rekening model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,14 +94,8 @@ class PostController extends Controller
     {
         $model = $this->findModel($id);
 
-        $post = Yii::$app->request->post();
-        if (!empty($post) && $model->load($post)) {
-            $model->content_cut = substr($model->content, 0, 255) . '...</p>';
-            $model->updated_at = date('Y-m-d');
-            $model->updated_by = Yii::$app->user->id;
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -110,7 +104,7 @@ class PostController extends Controller
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing Rekening model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +118,15 @@ class PostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the Rekening model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return Rekening the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Rekening::findOne($id)) !== null) {
             return $model;
         }
 

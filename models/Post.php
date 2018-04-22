@@ -32,10 +32,10 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'created_at', 'created_by'], 'required'],
+            [['title', 'created_at', 'created_by', 'content', 'status'], 'required'],
             [['content_cut', 'content'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['created_at', 'updated_at', 'status'], 'safe'],
+            [['created_by', 'updated_by', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -47,10 +47,11 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Judul',
             'content_cut' => 'Content Cut',
-            'content' => 'Content',
+            'content' => 'Artikel/Berita',
             'created_at' => 'Created At',
+            'status' => 'Status',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',

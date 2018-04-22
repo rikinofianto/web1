@@ -4,19 +4,20 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\search\PostSearch */
+/* @var $searchModel frontend\models\search\RekeningSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Rekenings';
+$this->params['breadcrumbs'][] = ['label' => 'Bank', 'url' => ['bank/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-index">
-<dv class="row">
+<div class="rekening-index">
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Rekening', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -24,10 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'title', 'contentOptions' => ['style' => 'width:75%; word-wrap:break-word;']],
-
+            'atas_nama',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-</dv>
 </div>

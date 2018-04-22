@@ -8,11 +8,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\LoginForm;
+use frontend\models\Post;
 use frontend\models\search\PostSearch;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\data\ActiveDataProvider;
 
 /**
  * Site controller
@@ -217,10 +219,14 @@ class SiteController extends Controller
 
     public function actionPosts()
     {
-        $searchModel = new PostSearch();
-
-        return $this->render('posts', [
-            'searchModel' => $searchModel,
+        $dataProvider = new ActiveDataProvider([
+            'query' => Post::find()->where(['status' => 1])->orderBy('id DESC'),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
+
+        return $this->render('posts', ['listDataProvider' => $dataProvider]);
+
     }
 }

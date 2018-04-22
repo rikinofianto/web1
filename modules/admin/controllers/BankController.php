@@ -3,16 +3,16 @@
 namespace frontend\modules\admin\controllers;
 
 use Yii;
-use frontend\models\Post;
-use frontend\models\search\PostSearch;
+use frontend\models\Bank;
+use frontend\models\search\BankSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * BankController implements the CRUD actions for Bank model.
  */
-class PostController extends Controller
+class BankController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class PostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all Bank models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PostSearch();
+        $searchModel = new BankSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single Bank model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,33 +58,25 @@ class PostController extends Controller
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new Bank model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new Bank();
 
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-        $post = Yii::$app->request->post();
-        if (!empty($post) && $model->load($post)) {
-            $model->content_cut = substr($model->content, 0, 255) . '...</p>';
-            $model->created_at = date('Y-m-d');
-            $model->created_by = Yii::$app->user->id;
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Post model.
+     * Updates an existing Bank model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,14 +86,8 @@ class PostController extends Controller
     {
         $model = $this->findModel($id);
 
-        $post = Yii::$app->request->post();
-        if (!empty($post) && $model->load($post)) {
-            $model->content_cut = substr($model->content, 0, 255) . '...</p>';
-            $model->updated_at = date('Y-m-d');
-            $model->updated_by = Yii::$app->user->id;
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -110,7 +96,7 @@ class PostController extends Controller
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing Bank model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -124,15 +110,15 @@ class PostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the Bank model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return Bank the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Bank::findOne($id)) !== null) {
             return $model;
         }
 
