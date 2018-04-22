@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -37,8 +38,9 @@ AppAsset::register($this);
     ]);
     if (Yii::$app->user->isGuest) {
         $menuItems = [
-            ['label' => 'Donasi', 'url' => ['/donasi/index']],
-            ['label' => 'Post', 'url' => ['/site/posts']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Donate', 'url' => ['/donasi/index']],
+            ['label' => 'Event', 'url' => ['/site/posts']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
         ];
     } else {
@@ -79,16 +81,16 @@ AppAsset::register($this);
             <ul class="footer-social large-margin-right">
                 <span class="centered-inline">Find us on :</span>
                 <li class="footer-social__item">
-                    <a target="_blank" class="btn btn-social" onclick="ga('send', 'event', 'desktop.site-footer-facebook.icon', 'click', 'desktop.site-footer-facebook.icon')" href="https://www.facebook.com/Kitabisadotcom"><img src="https://assets.kitabisa.com/images/logo__fb-circle.png" alt=""></a>
+                    <?= Html::a(Html::img('@web/img/logo__fb-circle.png', ['class' =>'']), 'http://facebook.com', ['class' => 'btn btn-social', 'target' => '_blank']) ?>
                 </li>
                 <li class="footer-social__item">
-                    <a target="_blank" class="btn btn-social" onclick="ga('send', 'event', 'desktop.site-footer-instagram.icon', 'click', 'desktop.site-footer-instagram.icon')" href="https://instagram.com/kitabisacom/"><img src="https://assets.kitabisa.com/images/logo__ig-circle.png" alt=""></a>
+                    <?= Html::a(Html::img('@web/img/logo__ig-circle.png', ['class' =>'']), 'http://instagram.com', ['class' => 'btn btn-social', 'target' => '_blank']) ?>
                 </li>
                 <li class="footer-social__item">
-                    <a target="_blank" class="btn btn-social" onclick="ga('send', 'event', 'desktop.site-footer-twitter.icon', 'click', 'desktop.site-footer-twitter.icon')" href="https://twitter.com/kitabisacom"><img src="https://assets.kitabisa.com/images/logo__twitter-circle.png" alt=""></a>
+                    <?= Html::a(Html::img('@web/img/logo__twitter-circle.png', ['class' =>'']), 'http://twitter.com', ['class' => 'btn btn-social', 'target' => '_blank']) ?>
                 </li>
                 <li class="footer-social__item">
-                    <a target="_blank" class="btn btn-social" onclick="ga('send', 'event', 'desktop.site-footer-youtube.icon', 'click', 'desktop.site-footer-youtube.icon')" href="https://www.youtube.com/user/kitabisaindonesia"><img src="https://assets.kitabisa.com/images/logo__yt-circle.png" alt=""></a>
+                    <?= Html::a(Html::img('@web/img/logo__yt-circle.png', ['class' =>'']), 'http://youtube.com', ['class' => 'btn btn-social', 'target' => '_blank']) ?>
                 </li>
             </ul>
         </div>
@@ -103,28 +105,17 @@ AppAsset::register($this);
                 <a href="#">Jl. Kasuari Blok A No.14</a>
                 <br>Pondok Aren, Tangerang Selatan.</p>
         </div>
-        <div class="col--m4">
-            <h3 class="footer-flat-list__title">Take Action</h3>
-            <ul class="list-nostyle footer-flat-list">
-                <li>
-                    <a onclick="ga('send', 'event', 'desktop.site-footer-register.campaign', 'click', 'desktop.site-footer-register.campaign')" href="/buat-campaign">Galang Dana</a>
-                </li>
-                <li>
-                    <a onclick="ga('send', 'event', 'desktop.site-footer-explore.campaign', 'click', 'desktop.site-footer-explore.campaign')" href="/explore/all">Donasi</a>
-                </li>
-            </ul>
-        </div>
-        <!-- <div class="col--m3">
+        <div class="col--m2" style="float: right;">
             <h3 class="footer-flat-list__title">Connect</h3>
             <ul class="list-nostyle footer-flat-list">
                 <li>
-                    <a onclick="ga('send', 'event', 'desktop.site-footer-our-team', 'click', 'desktop.site-footer-our-team')" href="/our-team">Our Team</a>
+                    <?= Html::a('Out Team', Url::toRoute(['about']), []) ?>
                 </li>
                 <li>
-                    <a onclick="ga('send', 'event', 'desktop.site-footer-partners', 'click', 'desktop.site-footer-partners')" href="/partners">Our Partners</a>
+                    <?= Html::a('Our Partners', Url::toRoute(['partner']), []) ?>
                 </li>
             </ul>
-        </div> -->
+        </div>
     </div>
     <div class="copyright">
         <small>Copyright © 2018 Project V All Rights Reserved</small>

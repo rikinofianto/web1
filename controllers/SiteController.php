@@ -235,4 +235,10 @@ class SiteController extends Controller
 
         return $this->render('post_view', ['model' => $dataProvider]);
     }
+
+    public function actionPartner()
+    {
+        return $this->render('partner');
+    }
+
 }

@@ -1,5 +1,7 @@
 <?php
 use yii\widgets\ListView;
+$this->title = 'Event';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index">
 
